@@ -14,5 +14,10 @@ CHIP Mux {
     OUT out;
 
     PARTS:
-    // Put your code here:
+    // Attempt #1: Mux = Or(And(b, sel), And(a, Not(sel)))
+    // Formula from https://github.com/woai3c/nand2tetris/blob/master/01/Mux.hdl
+    Not( in = sel                    , out = notSel     );
+    And(  a = b      , b = sel       , out = bAndSel    );
+    And(  a = a      , b = notSel    , out = aAndNotSel );
+    Or (  a = bAndSel, b = aAndNotSel, out = out        );
 }
