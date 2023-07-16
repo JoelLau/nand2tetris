@@ -13,5 +13,25 @@ CHIP Xor {
     OUT out;
 
     PARTS:
-    // Put your code here:
+    // Attempt #1 (guess and check)
+    // And(a=a,b=b,out=andab);
+    // Or(a=a,b=b,out=orab);
+    // Not(in=orab,out=notorab);
+    // Or(a=andab,b=notorab,out=opp);
+    // Not(in=opp,out=out);
+
+    // Attempt #2 (method from Unit 1.2)
+    //  ---------------------------------------------------------------------------
+    // | A | B | XOR(A,B) |  EQUATION                                              |
+    // | - | - | -------- | ------------------------------------------------------ |
+    // | 0 | 0 | 0        |   OR( // use "OR" to combine all expected "1" results  |
+    // | 0 | 1 | 1        |        AND(NOT(A), B     ), //1st line                 |
+    // | 1 | 0 | 1        |        AND(    B , NOT(A))  //2nd line                 |
+    // | 1 | 1 | 0        |   );                                                   |
+    //  ---------------------------------------------------------------------------
+    Not(in=a,out=notA);
+    Not(in=b,out=notB);
+    And(a=notA,b=b,out=firstLine);
+    And(a=a,b=notB,out=secondLine);
+    Or(a=firstLine,b=secondLine,out=out);
 }
